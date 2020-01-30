@@ -9,7 +9,7 @@ dotenv.config({ path: "./config/config.env" });
 const app = express();
 
 // mount the route file to the app
-app.use("/api/v1/bootcamp", bootcamp);
+app.use("/api/v1/bootcamps", bootcamp);
 
 const PORT = process.env.PORT || 5000;
 
