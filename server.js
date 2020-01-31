@@ -5,12 +5,12 @@ const colors = require("colors");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/error");
+// load env variable in project
+dotenv.config({ path: "./config/config.env" });
 
 // bring the route file
 const bootcamp = require("./routes/bootcamp");
 
-// load env variable in project
-dotenv.config({ path: "./config/config.env" });
 
 // connect to database
 connectDB();
