@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-const colors = require('colors');
+const colors = require("colors");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
 
@@ -15,6 +15,10 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 const app = express();
+
+//body-parse
+app.use(express.json()); //---> we can use this instead of body-parser pakage
+
 /* 
 // use the middleware
 app.use(logger);
@@ -33,7 +37,9 @@ const PORT = process.env.PORT || 5000;
 // start listning on the port
 const server = app.listen(
   PORT,
-  console.log(`server is up in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold)
+  console.log(
+    `server is up in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold
+  )
 );
 
 // globale handler for unhandled promise rejections
