@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const colors = require("colors");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
+const errorHandler = require("./middleware/error");
 
 // bring the route file
 const bootcamp = require("./routes/bootcamp");
@@ -31,6 +32,9 @@ if ((process.env.NODE_ENV = "development")) {
 
 // mount the route file to the app
 app.use("/api/v1/bootcamps", bootcamp);
+
+// to use error handler middleware in bootcamp wo we need to put it after bootcamp router, middlewares are excutes in linear order
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
