@@ -10,6 +10,7 @@ dotenv.config({ path: "./config/config.env" });
 
 // bring the route file
 const bootcamp = require("./routes/bootcamp");
+const courses = require('./routes/courses');
 
 
 // connect to database
@@ -32,6 +33,7 @@ if ((process.env.NODE_ENV = "development")) {
 
 // mount the route file to the app
 app.use("/api/v1/bootcamps", bootcamp);
+app.use('/api/V1/courses', courses)
 
 // to use error handler middleware in bootcamp wo we need to put it after bootcamp router, middlewares are excutes in linear order
 app.use(errorHandler);
