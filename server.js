@@ -1,7 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const fileupload = require("express-fileupload");
 const colors = require("colors");
+const path = require("path");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/error");
@@ -10,8 +12,7 @@ dotenv.config({ path: "./config/config.env" });
 
 // bring the route file
 const bootcamp = require("./routes/bootcamp");
-const courses = require('./routes/courses');
-
+const courses = require("./routes/courses");
 
 // connect to database
 connectDB();
@@ -31,9 +32,15 @@ if ((process.env.NODE_ENV = "development")) {
   app.use(morgan("dev"));
 }
 
+// fileuploading
+app.use(fileupload());
+
+// set static folder
+app.use(express.static(path.join(__dirname, "public")));
+
 // mount the route file to the app
 app.use("/api/v1/bootcamps", bootcamp);
-app.use('/api/V1/courses', courses)
+app.use("/api/V1/courses", courses);
 
 // to use error handler middleware in bootcamp wo we need to put it after bootcamp router, middlewares are excutes in linear order
 app.use(errorHandler);
